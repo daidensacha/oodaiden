@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ooDaiden // Full Stack Developer</title>
+    <style>
+      :root {
+        --bg: #0a0a0c;
+        --surface: #121216;
+        --border: #22222a;
+        --text: #eaeaea;
+        --text-muted: #888892;
+        --accent: #627da7;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background-color: var(--bg);
+        color: var(--text);
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+          Arial, sans-serif;
+        min-height: 100vh;
+        padding: 0 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      /* Branding */
+      nav {
+        width: 100%; /* Changed from 1080px so it fluidly shrinks on phone displays */
+        max-width: 1080px; /* Keeps your crisp 1080px line on big monitors */
+        padding: 2.5rem 0;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        letter-spacing: -0.03em;
+        color: var(--text);
+        text-decoration: none;
+      }
+
+      /* Main Screen Layout Area */
+
+      .container {
+        width: 100%;
+        max-width: 1080px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding-top: clamp(4rem, 10vh, 8rem);
+        margin-bottom: 6rem;
+      }
+
+      header {
+        margin-bottom: 4.5rem;
+      }
+
+      header h1 {
+        font-size: clamp(1.6rem, 2.5vw, 2.4rem);
+        line-height: 1.2;
+        letter-spacing: -0.03em;
+        font-weight: 500;
+        margin-bottom: 1.25rem;
+      }
+
+      .bio {
+        color: var(--text-muted);
+        font-size: 1rem;
+        line-height: 1.6;
+      }
+
+      .section-title {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--text-muted);
+        margin-bottom: 1.25rem;
+        font-weight: 700;
+      }
+
+      .tech-typewriter {
+        display: flex;
+        align-items: center;
+        margin-top: 4rem;
+        min-height: 1.4rem;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+          Arial, sans-serif;
+
+        font-size: 0.85rem;
+        letter-spacing: 0.04em;
+        white-space: nowrap;
+      }
+
+      /* Fixed width keeps every technology list aligned */
+      .tech-group {
+        display: inline-block;
+        width: 7.5rem;
+        color: var(--text);
+        font-size: 0.9rem;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        line-height: inherit;
+      }
+
+      .tech-text {
+        color: var(--text-muted);
+        font-size: 0.85rem;
+        font-weight: 400;
+        letter-spacing: 0.04em;
+        line-height: inherit;
+      }
+
+      /* Typewriter cursor */
+      /* .tech-cursor {
+        width: 1px;
+        height: 1em;
+        margin-left: 0.2rem;
+        background: var(--text-muted);
+        animation: cursor-blink 0.8s steps(1) infinite;
+      } */
+
+      .tech-output {
+        display: inline-flex;
+        align-items: center;
+      }
+
+      /* @keyframes cursor-blink {
+        50% {
+          opacity: 0;
+        }
+      } */
+
+      @media (max-width: 600px) {
+        nav {
+          padding: 2rem, 0;
+        }
+
+        .container {
+          padding-top: 2.5rem;
+          margin-bottom: 0;
+        }
+
+        header {
+          margin-bottom: 3rem;
+        }
+
+        .tech-typewriter {
+          margin-top: 2.5rem;
+          flex-direction: column;
+          align-items: flex-start;
+          white-space: normal;
+          width: 100%;
+          min-height: 4.5rem;
+        }
+
+        .tech-group {
+          width: auto;
+          margin-bottom: 0.5rem;
+        }
+
+        .tech-output {
+          display: inline-flex;
+          align-items: center;
+          flex-wrap: wrap;
+          max-width: 100%;
+        }
+
+        .tech-text {
+          font-size: 0.8rem;
+          white-space: normal;
+          overflow-wrap: break-word;
+        }
+
+        .tech-cursor {
+          margin-top: 0.1rem;
+        }
+
+        footer {
+          margin-top: 4rem;
+          padding: 1.5rem 0;
+        }
+      }
+      /* Fixed Grid Configuration */
+      .links-grid {
+        display: grid;
+        /* auto-fit can pull elements out of bounds if phone viewports drop below 320px.
+                 Using auto-fill or a fluid unit fallback handles narrow layouts cleanly. */
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+        gap: 1.25rem;
+        width: 100%;
+      }
+
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 1.5rem;
+        text-decoration: none;
+        color: inherit;
+        transition:
+          border-color 0.2s ease,
+          transform 0.2s ease;
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+      }
+
+      .card:hover {
+        border-color: var(--accent);
+        transform: translateY(-2px);
+      }
+
+      .card h2 {
+        font-size: 1.1rem;
+        font-weight: 500;
+      }
+
+      .card p {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+        line-height: 1.4;
+      }
+
+      footer {
+        width: 100%;
+        max-width: 1080px;
+        margin-top: 8rem;
+        padding: 2rem 0;
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        border-top: 1px solid var(--border);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Logo anchors permanently to the Top Left -->
+    <nav>
+      <span class="logo">ooDaiden</span>
+    </nav>
+
+    <!-- Content flows seamlessly down the screen at 1080px broad scale -->
+    <div class="container">
+      <header>
+        <h1>Finding solutions. Building useful, data-driven applications.</h1>
+
+        <p class="bio">
+          Full-stack developer based in Bavaria, Germany, focused on turning
+          real-world problems and ideas into structured, practical software.
+        </p>
+
+        <div class="tech-typewriter">
+          <span class="tech-group" id="tech-group">LANGUAGES</span>
+          <span class="tech-output">
+            <span class="tech-text" id="tech-text"></span>
+            <!-- <span class="tech-cursor" aria-hidden="true"></span> -->
+          </span>
+        </div>
+      </header>
+
+      <main>
+        <div class="section-title">Connect & Contact</div>
+        <div class="links-grid">
+          <a
+            href="https://github.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="card"
+          >
+            <h2>GitHub Profile &rarr;</h2>
+            <p>Projects, experiments, source code and things I'm working on.</p>
+          </a>
+          <a
+            href="https://linkedin.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="card"
+          >
+            <h2>LinkedIn Network &rarr;</h2>
+            <p>Experience, background and professional connections.</p>
+          </a>
+        </div>
+      </main>
+    </div>
+
+    <footer>&copy; 2026 ooDaiden. Hosted globally via Cloudflare.</footer>
+    <script>
+      const techGroups = [
+        {
+          group: "LANGUAGES",
+          text: "JavaScript · TypeScript",
+        },
+        {
+          group: "FRONTEND",
+          text: "React · Next.js · Tailwind CSS",
+        },
+        {
+          group: "BACKEND",
+          text: "Node.js · Express · Prisma",
+        },
+        {
+          group: "DATABASES",
+          text: "PostgreSQL · SQLite · MongoDB",
+        },
+      ];
+
+      const groupElement = document.getElementById("tech-group");
+      const textElement = document.getElementById("tech-text");
+
+      let groupIndex = 0;
+      let characterIndex = 0;
+      let deleting = false;
+
+      const typeSpeed = 55;
+      const deleteSpeed = 30;
+      const completedPause = 1800;
+      const changePause = 350;
+
+      function animateTechStack() {
+        const current = techGroups[groupIndex];
+
+        groupElement.textContent = current.group;
+
+        if (!deleting) {
+          // Type the current technology string
+          characterIndex++;
+
+          textElement.textContent = current.text.slice(0, characterIndex);
+
+          if (characterIndex === current.text.length) {
+            deleting = true;
+
+            setTimeout(animateTechStack, completedPause);
+            return;
+          }
+
+          setTimeout(animateTechStack, typeSpeed);
+        } else {
+          // Delete only the technologies
+          characterIndex--;
+
+          textElement.textContent = current.text.slice(0, characterIndex);
+
+          if (characterIndex === 0) {
+            deleting = false;
+
+            groupIndex = (groupIndex + 1) % techGroups.length;
+
+            setTimeout(animateTechStack, changePause);
+            return;
+          }
+
+          setTimeout(animateTechStack, deleteSpeed);
+        }
+      }
+
+      animateTechStack();
+    </script>
+  </body>
+</html>
